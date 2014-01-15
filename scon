@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+HOSTS=`awk '{print $1}' ~/.ssh/known_hosts`
+
+host_array=()
+echo "Which hosts would you like to ssh to?"
+options=1
+for host in $HOSTS
+do
+  echo "($options)"  $host
+  host_array[options]=$host
+  options=`expr $options + 1`
+done
+
+echo -n "Please enter your selection(enter 'e' to exit): "
+read host_selection
+if [ $host_selection == 'e' ];then
+  echo "exitting without connection."
+  exit 0
+else
+  ssh ${host_array[$host_selection]}
+fi
