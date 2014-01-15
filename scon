@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HOSTS=`awk '{print $1}' ~/.ssh/known_hosts`
+HOSTS=`awk -F'[, ]' '{print $1}' ~/.ssh/known_hosts`
 
 host_array=()
 echo "Which hosts would you like to ssh to?"
